@@ -30,7 +30,11 @@ DEPENDS += " \
     python3-pybind11 \
     "
 
-do_unpack(){
+# Normally, you don't do a configure step that does download of
+# sources, but Google's got their OWN notions of things.  They
+# download critical dependencies and then _*STATICALLY*_ link them
+# with TensorFlow anything.  It's worse in the full TensorFlow, mind.
+do_configure(){
 	${S}/tensorflow/lite/tools/make/download_dependencies.sh
 }
 
