@@ -24,11 +24,5 @@ do_compile () {
 do_install() {
     install -d ${D}/usr/lib
     install -d ${D}/usr/include
-
-    if [ ${TARGET_ARCH} = "aarch64" ]; then
-        # FIXME - Needs the install steps here for specific arch
-    elif [ ${TARGET_ARCH} = "arm" ]; then
-        # FIXME - Needs the install steps here for specific arch
-    fi
 }
 
