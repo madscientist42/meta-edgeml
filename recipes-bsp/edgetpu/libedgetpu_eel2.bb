@@ -3,7 +3,6 @@ HOMEPAGE = "https://coral.ai/"
 LICENSE = "Apache2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5="
 
-inherit bazel
 
 SRC_URI = " \
     git://github.com/google-coral/edgetpu.git;protocol=https \
