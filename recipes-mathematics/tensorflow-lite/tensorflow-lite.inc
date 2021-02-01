@@ -25,6 +25,7 @@ SRC_URI = " \
     file://001-Change-curl-to-wget-command.patch \
     file://001-TensorFlow-Lite_Makefile.patch \
     file://001-Remove-toolchain-setup-and-pybind11.patch \
+    file://FindTFLite.cmake \
     "
 
 S = "${WORKDIR}/git"
