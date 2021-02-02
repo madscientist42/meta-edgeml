@@ -48,3 +48,19 @@ do_install() {
     # Now, drop the CMake helper into something resembling the right place...
     install ${WORKDIR}/FindTFLite.cmake ${D}/usr/share/cmake/Modules
 }
+
+# Kind of override files for packaging.  We're going to make the package BE a -dev
+# without saying it so we can make it play nicely with Yocto.  It wants the package
+# to RDEPEND on ${PN} so, we're going to give it that- if we ever move to a dynamic
+# library, we'll want to re-work this.
+FILES_${PN} = " \
+    /usr/include \
+    "
+
+FILES_${PN}-dev = " \
+    /usr/share \
+    "
+
+FILES_${PN}-staticdev = " \
+    /usr/lib \
+    "
