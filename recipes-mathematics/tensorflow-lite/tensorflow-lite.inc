@@ -15,8 +15,16 @@ COMPATIBLE_MACHINE = "(aarch64|arm)"
 # won't be used by the other expansions that follow...
 BPV = "${@'.'.join(d.getVar('PV').split('.')[0:2])}"
 
-# Since they tag off of something resembling ${PV}, use it as needed.
-GIT_HASH = "c09b6df6896ed71fcd5cb26b27ec1c83f80780cf"
+# Since they tag off of something resembling ${PV}, use it as needed.  We support
+# a "git" rev (And you can specify preferences accorsingly in a config for layer,
+# distro, or locally here...) as well as a version.  Version is computed from the
+# previous expression and the following.  If it's "git", we just use what's specified
+# in "GIT_HASH" here- otherwise we figure out branch and SRCREV off of ${PV}.
+#
+# If you want a differing version line in the sand for "git" versioning, you specify
+# a new GIT_HASH value in a .bbappend and it will fetch that instead.  This includes
+# the magic ${AUTOREV} "hash" value.
+GIT_HASH ?= "c204a11c7509b18411817c587f6c0a48afe545b8"
 SRCREV = "${@bb.utils.contains('PV', 'git', '${GIT_HASH}', 'v${PV}', d)}"
 BRANCH = "${@bb.utils.contains('PV', 'git', '', ';branch=r${BPV}', d)}"
 

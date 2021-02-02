@@ -1,38 +1,35 @@
-# Dogsbody for the C++ library build.  This handles the actual operations.
-# the recipes themselves let us specify version or "git" for preferred
-# or as close to the tip of master as we dare.
+# Dogsbody for the C++ library build with GPU delegate suppot.  This handles
+# the actual operations for the recipes themselves let us specify version or
+# "git" for preferred recipes.  "git" lets us go to the tip of TensorFlow
+# or as close to it as we dare...
 
-DESCRIPTION = "TensorFlow Lite C++ library"
+DESCRIPTION = "TensorFlow Lite C++ library with GPU delegate support"
 
-BUILD_TOPLEVEL = "${S}/tensorflow/lite/tools/make"
+PROVIDES = "libtensorflow-lite"
 
-# Normally, you don't do a configure step that does download of
-# sources, but Google's got their OWN notions of things.  They
-# download critical dependencies and then _*STATICALLY*_ link them
-# with TensorFlow anything.  It's worse in the full TensorFlow, mind.
-do_configure(){
-	${S}/tensorflow/lite/tools/make/download_dependencies.sh
-}
+# Our dependencies expand a smidge...some of this is a generic requirement (Like OpenCL,
+# OpenGL, and Vulkan), some of this is a requirement because the headers, etc. we need
+# are handled in the 2.5.x pre-release git versions, but not in prior versions.  While
+# this takes some of the control out of our hands for build/packaging, etc. we'll live
+# with it for now.  It should be an option on their CMake and we're going to suggest
+# this to them so everyone wins here.
+DEPENDS = " \
+    opencl-headers \
+    mesa \
+    "
 
-# FIXME - This is a hack that supports the usual suspects for this since
-#         Google doesn't support everything under the sun with this like they
-#         ought to with this- it's "optimized" in thier take and is limited.
-do_compile () {
-    echo build ${TARGET_ARCH}
+# This is built with a CMake builder instead of the other.  Kind of experimental and all.
+# Until at least r2.5, this beastie is a, "...as close to the tip as we dare..." thing.
+inherit cmake
 
-    case "${TARGET_ARCH}" in
-        aarch64)
-            ${BUILD_TOPLEVEL}/build_aarch64_lib.sh
-            ;;
+OECMAKE_SOURCEPATH = "${S}/tensorflow/lite"
 
-        arm)
-            # Blindly presume a 32-bit RPi other than Pi Classic or PiZero, which are
-            # ARMv6 class machines...
-            ${BUILD_TOPLEVEL}/build_rpi_lib.sh
-            ;;
-    esac
-
-}
+# Make this act as close to the makefile solution as we can, but add GPU
+# delegate support.
+EXTRA_OECMAKE += " \
+    -DTFLITE_ENABLE_XNNPACK=OFF \
+    -DTFLITE_ENABLE_GPU=ON \
+    "
 
 # Unfortunately, like pretty much everything in TF, it's not QUITE done right for us.
 # We have to install this manually- the CMake build doesn't handle installs (Go figure...).
@@ -40,7 +37,7 @@ do_install() {
     install -d ${D}/usr/lib
     install -d ${D}/usr/include
     install -d ${D}/usr/share/cmake/Modules
-    install -m 0644 ${BUILD_TOPLEVEL}/gen/${TARGET_OS}_${TARGET_ARCH}/lib/libtensorflow-lite.a ${D}/usr/lib
+    install -m 0644 ${B}/libtensorflow-lite.a ${D}/usr/lib
     # We're isolating header files into a proper place (i.e. tflite/<foo> for #includes, etc.)
     rsync -a --prune-empty-dirs --include '*/' --include '*.h' --exclude '*' ${OECMAKE_SOURCEPATH} ${D}/usr/include
     # Clean up a few tidbits.  For example we don't want testing, python bindings, etc...
@@ -51,4 +48,3 @@ do_install() {
     # Now, drop the CMake helper into something resembling the right place...
     install ${WORKDIR}/FindTFLite.cmake ${D}/usr/share/cmake/Modules
 }
-
