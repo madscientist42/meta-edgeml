@@ -39,6 +39,11 @@ do_compile () {
             export TENSORFLOW_TARGET=rpi
             export TARGET=rpi
             ;;
+
+        x86_64)
+            export TENSORFLOW_TARGET=linux
+            export TARGET=linux
+            ;;
     esac
 
     ${S}/tensorflow/lite/tools/pip_package/build_pip_package.sh
