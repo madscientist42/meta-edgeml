@@ -58,3 +58,5 @@ FILES_${PN}-dev = ""
 INSANE_SKIP_${PN} += "dev-so \
                      "
 FILES_${PN} += "${libdir}/* ${datadir}/*"
+
+BBCLASSEXTEND += "native nativesdk"
