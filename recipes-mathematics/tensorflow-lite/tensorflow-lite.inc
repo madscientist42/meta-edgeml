@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=64a34301f8e355f57ec992c2af3e5157"
 
 # Specify a compatible list for us here...we only support a few cases of
 # TARGET_ARCH because Google looks at it that way.
-COMPATIBLE_MACHINE = "(aarch64|arm)"
+COMPATIBLE_MACHINE = "(aarch64|arm|x86_64)"
 
 # Intelligently handle versioning here...if ${PV} is, "git", handle the
 # fetch rules a bit differently...
