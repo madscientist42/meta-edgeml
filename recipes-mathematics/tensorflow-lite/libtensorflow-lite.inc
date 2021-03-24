@@ -23,6 +23,7 @@ DEPENDS = " \
 inherit cmake
 
 OECMAKE_SOURCEPATH = "${S}/tensorflow/lite"
+OECMAKE_COREPATH = "${S}/tensorflow/core"
 
 # Make this act as close to the makefile solution as we can, but add GPU
 # delegate support.
@@ -31,20 +32,24 @@ EXTRA_OECMAKE += " \
     -DTFLITE_ENABLE_GPU=ON \
     "
 
+# Add fPIC flag
+CXXFLAGS += " -fPIC "
+
 # Unfortunately, like pretty much everything in TF, it's not QUITE done right for us.
 # We have to install this manually- the CMake build doesn't handle installs (Go figure...).
 do_install() {
     install -d ${D}/usr/lib
     install -d ${D}/usr/include
+    install -d ${D}/usr/include/tensorflow
     install -d ${D}/usr/share/cmake/Modules
     install -m 0644 ${B}/libtensorflow-lite.a ${D}/usr/lib
-    # We're isolating header files into a proper place (i.e. tflite/<foo> for #includes, etc.)
-    rsync -a --prune-empty-dirs --include '*/' --include '*.h' --exclude '*' ${OECMAKE_SOURCEPATH} ${D}/usr/include
+    # We're isolating header files into a proper place (i.e. tensorflow/lite/<foo> for #includes, etc.)
+    rsync -a --prune-empty-dirs --include '*/' --include '*.h' --exclude '*' ${OECMAKE_SOURCEPATH} ${D}/usr/include/tensorflow
+    rsync -a --prune-empty-dirs --include '*/' --include '*.h' --exclude '*' ${OECMAKE_COREPATH} ${D}/usr/include/tensorflow
     # Clean up a few tidbits.  For example we don't want testing, python bindings, etc...
-    mv ${D}/usr/include/lite ${D}/usr/include/tflite
-    rm -rf ${D}/usr/include/tflite/python
-    rm -rf ${D}/usr/include/tflite/testing
-    rm -rf ${D}/usr/include/tflite/examples
+    rm -rf ${D}/usr/include/tensorflow/lite/python
+    rm -rf ${D}/usr/include/tensorflow/lite/testing
+    rm -rf ${D}/usr/include/tensorflow/lite/examples
     # Now, drop the CMake helper into something resembling the right place...
     install ${WORKDIR}/FindTFLite.cmake ${D}/usr/share/cmake/Modules
 }
