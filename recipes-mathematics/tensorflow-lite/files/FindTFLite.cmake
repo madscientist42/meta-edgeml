@@ -12,7 +12,7 @@ if (TFLITE_INCLUDES)
   set (TFLITE_FIND_QUIETLY TRUE)
 endif (TFLITE_INCLUDES)
 
-find_path (TFLITE_INCLUDES tflite/version.h)
+find_path (TFLITE_INCLUDES tensorflow/lite/version.h)
 
 find_library (TFLITE_LIB NAMES TFLITE)
 
