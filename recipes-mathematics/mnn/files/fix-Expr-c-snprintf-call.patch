@@ -1,0 +1,23 @@
+From 5c592d85aafc9a1bc641acad013970f0cf8b8ea3 Mon Sep 17 00:00:00 2001
+From: Frank Earl <frank@earlconsult.com>
+Date: Sat, 21 Aug 2021 12:49:54 -0500
+Subject: Fix Expr to make more sense per compiler.
+
+It estimated from 2->11 bytes...so make it 12 and remove the warning
+problem...which is valid and the fix looks to be so as well...
+
+diff --git a/express/Expr.cpp b/express/Expr.cpp
+index 64c7cb1a..fa3c82e7 100644
+--- a/express/Expr.cpp
++++ b/express/Expr.cpp
+@@ -20,8 +20,8 @@
+ 
+ //#define MNN_EXPRESS_ERROR_REPORT
+ static inline std::string numberToString(int index) {
+-    char s[10];
+-    snprintf(s, 10, "%d", index);
++    char s[12];
++    snprintf(s, 12, "%d", index);
+     return std::string(s);
+ }
+ 
