@@ -39,7 +39,7 @@ EXTRA_OECMAKE = " \
 
 # We're going to go out on a limb and say we always support HW FP- it does
 # little good to try to do NN Inferrence without that on ARM...
-EXTRA_OECMAKE_append_arm = " \
+EXTRA_OECMAKE:append_arm = " \
     -DMNN_BUILD_HARD=on \
     "
 
@@ -80,26 +80,26 @@ do_install_append() {
 PACKAGES += "${PN}-tools ${PN}-opencl ${PN}-vulkan"
 
 # The tools explicitly require the library...
-RDEPENDS_${PN}-tools = "${PN}"
+RDEPENDS:${PN}-tools = "${PN}"
 
-FILES_${PN} = " \
+FILES:${PN} = " \
     /usr/lib/libMNN.so \
     "
 
 
-FILES_${PN}-opencl = " \
+FILES:${PN}-opencl = " \
     /usr/lib/libMNN_CL.so \
     "
 
-FILES_${PN}-vulkan = " \
+FILES:${PN}-vulkan = " \
     /usr/lib/libMNN_Vulkan.so \
     "
 
-FILES_${PN}-dev = " \
+FILES:${PN}-dev = " \
     /usr/include \
     "
 
-FILES_${PN}-tools = " \
+FILES:${PN}-tools = " \
     /usr/lib/libMNNTrain.so \
     /usr/lib/libMNN_Express.so \
     /usr/lib/libMNNConvertDeps.so \

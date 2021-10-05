@@ -14,16 +14,16 @@ SRCREV = "3e50ff5c6ecf3737a03f6581fbe58ac540aaf1cd"
 S = "${WORKDIR}/git"
 
 PACKAGES = "${PN} ${PN}-dev google-apex"
-RDEPENDS_google-apex = "${PN}"
+RDEPENDS:google-apex = "${PN}"
 
-FILES_${PN} = " \
+FILES:${PN} = " \
     /lib/modules/${LINUX_VERSION}/extra/gasket.ko \
     "
 
-FILES_${PN}-dev = " \
+FILES:${PN}-dev = " \
     /usr/include \
     "
 
-FILES_google-apex = " \
+FILES:google-apex = " \
     /lib/modules/${LINUX_VERSION}/extra/apex.ko \
     "

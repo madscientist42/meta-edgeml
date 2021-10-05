@@ -58,14 +58,14 @@ do_install() {
 # without saying it so we can make it play nicely with Yocto.  It wants the package
 # to RDEPEND on ${PN} so, we're going to give it that- if we ever move to a dynamic
 # library, we'll want to re-work this.
-FILES_${PN} = " \
+FILES:${PN} = " \
     /usr/include \
     "
 
-FILES_${PN}-dev = " \
+FILES:${PN}-dev = " \
     /usr/share \
     "
 
-FILES_${PN}-staticdev = " \
+FILES:${PN}-staticdev = " \
     /usr/lib \
     "

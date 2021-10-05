@@ -10,7 +10,7 @@ DEPENDS = " \
     python3-wheel-native \
     "
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     python3 \
     "
 
@@ -22,5 +22,4 @@ SRCREV = "${PV}"
 S = "${WORKDIR}/git"
 
 do_compile() {
-
 }
