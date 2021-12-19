@@ -39,7 +39,7 @@ EXTRA_OECMAKE = " \
 
 # We're going to go out on a limb and say we always support HW FP- it does
 # little good to try to do NN Inferrence without that on ARM...
-EXTRA_OECMAKE:append_arm = " \
+EXTRA_OECMAKE:append:arm = " \
     -DMNN_BUILD_HARD=on \
     "
 
@@ -68,7 +68,7 @@ PACKAGECONFIG[opencl] = " \
 # Handle all the .out files and pour them into /usr/bin for the tools.
 # Also go scrounge out the OTHER .so's that the tools use so they can
 # be packaged (They don't install the tools or their .so's- annoying...)
-do_install_append() {
+do_install:append() {
     mkdir -p ${D}/usr/bin
     find ${B} -name "*.out" -exec cp {} ${D}/usr/bin \; || true
     rm -f ${D}/usr/bin/a*

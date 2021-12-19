@@ -7,7 +7,7 @@ SRC_URI = " \
 	git://github.com/abseil/abseil-cpp \
 	"
 
-SRCREV = "cad3f30b44c2bfac54ee82c6fc9e49ba49078620"
+SRCREV = "${PV}"
 
 PR = "r0"
 
