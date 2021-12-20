@@ -1,0 +1,20 @@
+From e6d9c5258766bb24ef7a2f5ceb1ef9e3c4e3a147 Mon Sep 17 00:00:00 2001
+From: Frank Earl <frank@earlconsult.com>
+Date: Mon, 20 Dec 2021 08:25:21 -0600
+Subject: Add cstdint
+
+Helps in later compiler versions, actually...
+
+diff --git a/source/backend/cpu/compute/WinogradOptFunctionInt8.cpp b/source/backend/cpu/compute/WinogradOptFunctionInt8.cpp
+index 136e3ab2..e96d68f8 100644
+--- a/source/backend/cpu/compute/WinogradOptFunctionInt8.cpp
++++ b/source/backend/cpu/compute/WinogradOptFunctionInt8.cpp
+@@ -12,6 +12,8 @@
+ #include <tuple>
+ #include <functional>
+ #include <numeric>
++#include <cstddef>
++#include <cstdint>
+ #include "WinogradOptFunctionInt8.hpp"
+ #include "Int8FunctionsOpt.h"
+ #include "core/TensorUtils.hpp"

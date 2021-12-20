@@ -1,0 +1,18 @@
+From 583d4f24d6eb6698fd485186d5565bc166c5ffe5 Mon Sep 17 00:00:00 2001
+From: Frank Earl <frank@earlconsult.com>
+Date: Sun, 19 Dec 2021 22:17:37 -0600
+Subject: Fix problem with latest GCC version with things...
+
+
+diff --git a/tensorflow/lite/simple_memory_arena_debug_dump.cc b/tensorflow/lite/simple_memory_arena_debug_dump.cc
+index 256fa0b9a7e..dc90f9b1326 100644
+--- a/tensorflow/lite/simple_memory_arena_debug_dump.cc
++++ b/tensorflow/lite/simple_memory_arena_debug_dump.cc
+@@ -18,6 +18,7 @@ limitations under the License.
+ #include <queue>
+ #include <string>
+ #include <vector>
++#include <limits>
+ 
+ #include "tensorflow/lite/simple_memory_arena.h"
+ 

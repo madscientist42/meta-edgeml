@@ -2,7 +2,7 @@
 # Handle common things for all of the tensorflow-lite specific recipes.
 
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=64a34301f8e355f57ec992c2af3e5157"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=c7e17cca1ef4230861fb7868e96c387e"
 
 # Specify a compatible list for us here...we only support a few cases of
 # TARGET_ARCH because Google looks at it that way.
@@ -29,10 +29,8 @@ SRCREV = "${@bb.utils.contains('PV', 'git', '${GIT_HASH}', 'v${PV}', d)}"
 BRANCH = "${@bb.utils.contains('PV', 'git', '', ';branch=r${BPV}', d)}"
 
 SRC_URI = " \
-    git://github.com/tensorflow/tensorflow.git${BRANCH} \
-    file://001-Change-curl-to-wget-command.patch \
-    file://001-TensorFlow-Lite_Makefile.patch \
-    file://001-Remove-toolchain-setup-and-pybind11.patch \
+    git://github.com/tensorflow/tensorflow.git;protocol=https;branch=${BRANCH} \
+    file://fix-missing-limits-include.patch \
     file://FindTFLite.cmake \
     "
 

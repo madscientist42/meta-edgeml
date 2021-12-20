@@ -2,11 +2,13 @@ DESCRIPTION = "Moblile Neural Net (MNN) neural net inferrence engine"
 HOMEPAGE = "http://www.mnn.zone/"
 LICENSE = "Apache-2.0"
 
-LIC_FILES_CHKSUM = "file://README.md;md5=692d64646daeb35b7c4ea4293840cc18"
+LIC_FILES_CHKSUM = "file://README.md;md5=7d6f032d089a227055f44d4616fdb803"
 
 SRC_URI = " \
     git://github.com/alibaba/MNN.git;protocol=https;branch=master \
     file://fix-Expr-c-snprintf-call.patch \
+    file://add-include-cstddef-and-cstdint.patch \
+    file://add-limits-include.patch \
     "
 
 SRCREV = "${PV}"

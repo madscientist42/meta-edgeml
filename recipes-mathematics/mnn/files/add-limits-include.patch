@@ -1,0 +1,18 @@
+From e1a0bd01ed66085546f21eae268b1a7822b10722 Mon Sep 17 00:00:00 2001
+From: Frank Earl <frank@earlconsult.com>
+Date: Mon, 20 Dec 2021 09:06:34 -0600
+Subject: Add <limits> for stricter C++17 compliance.
+
+
+diff --git a/tools/converter/include/cxxopts.hpp b/tools/converter/include/cxxopts.hpp
+index aba0135e..04b18fbc 100644
+--- a/tools/converter/include/cxxopts.hpp
++++ b/tools/converter/include/cxxopts.hpp
+@@ -36,6 +36,7 @@ THE SOFTWARE.
+ #include <unordered_map>
+ #include <unordered_set>
+ #include <vector>
++#include <limits>
+ #include <MNN/MNNDefine.h>
+ 
+ #ifdef __cpp_lib_optional
