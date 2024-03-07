@@ -4,7 +4,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://COPYING;md5=7dfaa79e2b070897e495fec386e3acfc"
 
 SRC_URI = " \
-    git://github.com/google/farmhash.git;protocol=https \
+    git://github.com/google/farmhash.git;protocol=https;branch=master \
     "
 
 SRCREV = "0d859a811870d10f53a594927d0d0b97573ad06d"

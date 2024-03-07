@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=998fb0b16ad8a4fb8bd41bf3faf2d21c"
 
 
 SRC_URI = " \
-    git://github.com/Maratyszcza/FP16.git;protocol=https \
+    git://github.com/Maratyszcza/FP16.git;protocol=https;branch=master \
     "
 
 SRCREV = "4dfe081cf6bcd15db339cf2680b9281b8451eeb3"

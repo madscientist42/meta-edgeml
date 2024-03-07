@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = " \
     "
 
 SRC_URI = " \
-    git://gitlab.com/libeigen/eigen.git;protocol=https \
+    git://gitlab.com/libeigen/eigen.git;protocol=https;branch=master \
     "
 
 SRCREV = "56c8b14d875ae42a52d0da52916fac1e29305ca7"
